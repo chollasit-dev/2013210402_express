@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  // res.send('Hello, Kitty!');
+  // res.send('Hello, Index!');
   res.status(200).json({
     fullname: "Chollasit Vibulsirikul"
   })
