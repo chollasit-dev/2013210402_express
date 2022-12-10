@@ -4,10 +4,10 @@ const Schema = mongoose.Schema
 const companySchema = new Schema({
     name:  String, // String is shorthand for {type: String}
     address: {
-      Province: String,
+      province: String,
     }
-  },{collection: "setting"});
+  },{collection: "companies"});
 
-const company = mongoose.model("setting", companySchema)
+const company = mongoose.model("Companies", companySchema)
 
 module.exports = company
