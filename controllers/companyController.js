@@ -25,8 +25,20 @@ const data = [
   },
 ];
 
-exports.company = (req, res, next) => {
+const Company = require('../models/company');
+
+exports.company = async (req, res, next) => {
+
+  const company = await Company.findOne()
+
     res.status(200).json({
-      data: data 
+      data: company
     })
+
 }
+
+// exports.company = (req, res, next) => {
+//     res.status(200).json({
+//       data: data 
+//     })
+// }
