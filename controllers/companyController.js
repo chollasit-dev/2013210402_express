@@ -100,20 +100,17 @@ exports.destroy = async(req, res, next) => {
       _id: id
     })
 
-    res.status(200).json({
-      message: "Delete Completed"
-    })
-    // if (company.deletedCount === 0) {
+    if (company.deletedCount === 0) {
 
-    //   throw new Error('Cannot perform an action, no user found.')
+      throw new Error('Cannot perform an action, no user found.')
 
-    // } else {
+    } else {
 
-    //   res.status(200).json({
-    //     message: "Delete Completed"
-    //   })
+      res.status(200).json({
+        message: "Delete Completed"
+      })
       
-    // }
+    }
   } catch (error) {
 
     res.status(400).json({
