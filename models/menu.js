@@ -9,7 +9,12 @@ const schema = new Schema({
   },{
     timestamps: true,
     collection: "menus",
+    toJSON: {virtuals: true},
 });
+
+schema.virtual('price_vat').get(function(){
+    return(this.price*0.07) + this.price
+})
 
 const menu = mongoose.model("Menu", schema)
 
