@@ -16,7 +16,9 @@ mongoose.connect(config.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology:
 // mongoose.connect('mongodb+srv://superdev:mRmoK0CDxft9FCje@2013210402-chollasit.ushw5qu.mongodb.net/restfulapi?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});     //Password replace <password>
 
 app.use(logger('dev'));
-app.use(express.json());
+app.use(express.json({
+    limit: '50mb'
+}));    //Define Image Size Limitation
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));

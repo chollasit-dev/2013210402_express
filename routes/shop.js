@@ -9,4 +9,6 @@ router.get ('/menu', menuController.index);
 
 router.get ('/:id', shopController.show);
 
+router.post('/', shopController.insert);
+
 module.exports = router;
