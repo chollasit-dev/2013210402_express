@@ -46,7 +46,7 @@ exports.insert = async(req, res, next) => {
   let shop = new Shop({
     name: name,
     location: location,
-    photo: await saveImageToDisk(photo),
+    photo: await saveImageToDisk(photo),  // Base64 Image
   });
 
     await shop.save();
