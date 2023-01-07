@@ -1,3 +1,3 @@
-Chollasit (Chin): Chapter 5 - Advance Mongoose
+Chollasit (Chin): Chapter 6 - Node.js (Express) with MongoDB
 2013210402
-24/12/2022
+1/7/2023
