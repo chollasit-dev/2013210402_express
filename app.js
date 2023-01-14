@@ -11,6 +11,8 @@ var shopRouter = require('./routes/shop');
 const staffRouter = require('./routes/staff');
 const config = require('./config/index');
 
+const errorHandler = require('./middleware/errorHandler');
+
 var app = express();
 mongoose.connect(config.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 // mongoose.connect('mongodb+srv://superdev:mRmoK0CDxft9FCje@2013210402-chollasit.ushw5qu.mongodb.net/restfulapi?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});     //Password replace <password>
@@ -28,5 +30,7 @@ app.use('/user', userRouter);
 app.use('/company', companyRouter);
 app.use('/staff', staffRouter);
 app.use('/shop', shopRouter);
+
+app.use(errorHandler)
 
 module.exports = app;

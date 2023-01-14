@@ -48,22 +48,16 @@ exports.company = async(req, res, next) => {
     const company = await Company.find().sort({ _id: 1 });
 
     if (!company) {
-
-      throw new Error('Company not found')
-
-    } else {
+      const error = new Error("Company not found")
+      error.statusCode = 400
+      throw error;
+    }
 
       res.status(200).json({
         data: company
       })
-
-    }
   } catch (error) {
-
-    res.status(400).json({
-      error:{ message: 'Error: ' + error.message }
-    })
-
+    next(error);
   }
 }
 
@@ -85,9 +79,9 @@ exports.insert = async(req, res, next) => {
       message: 'Insert Completed',
     })
   } catch (error) {
-    res.status(400).json({
-      error:{ message: 'Error: ' + error.message }
-    })
+    const e = new Error(err.message)
+    error.statusCode = 400
+    throw error;
   }
 }
 
@@ -101,24 +95,17 @@ exports.destroy = async(req, res, next) => {
     })
 
     if (company.deletedCount === 0) {
+      const error = new Error("Cannot delete, User not found!")
+      error.statusCode = 400
+      throw error;
 
-      throw new Error('Cannot perform an action, no user found.')
-
-    } else {
+    }
 
       res.status(200).json({
         message: "Delete Completed"
-      })
-      
-    }
+      })      
   } catch (error) {
-
-    res.status(400).json({
-      error:{
-        message: 'Error: ' + error.message
-      }
-    })
-
+    next(error);
   }
 }
 
@@ -141,17 +128,11 @@ exports.update = async (req, res, next) => {
     })
 
   } catch (error) {
-
-    res.status(400).json({
-      error:{
-        message: 'Error: ' + error.message
-      }
-    })
-
+    const e = new Error(err.message)
+    e.statusCode = 400
+    throw error;
   }
 }
-
-
 
 // exports.company = (req, res, next) => {
 //     res.status(200).json({

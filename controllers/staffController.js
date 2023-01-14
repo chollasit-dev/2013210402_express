@@ -25,18 +25,16 @@ exports.show = async(req, res, next) => {
     })
 
     if (!staff) {
-      throw new Error('ไม่พบผู้ใช้งาน')
-    } else {
+      const error = new Error("User not found!")
+      error.statusCode = 400
+      throw error
+    }
+
       res.status(200).json({
         data: staff
       })
-    }
   } catch (error) {
-    res.status(400).json({
-      error:{
-        message: 'เกิดข้อผิดพลาด: ' + error.message
-      }
-    })
+      next(error);
   }
 }
 
@@ -49,18 +47,12 @@ exports.destroy = async(req, res, next) => {
     })
 
     if (staff.deletedCount === 0) {
-      throw new Error('ไม่สามารถลบได้ / ไม่พบผู้ใช้งาน')
-    } else {
-      res.status(200).json({
-        message: "ลบเรียบร้อย"
-      })
+      const error = new Error("Cannot delete, no user found!")
+      error.statusCode = 400
+      throw error;
     }
   } catch (error) {
-    res.status(400).json({
-      error:{
-        message: 'เกิดข้อผิดพลาด: ' + error.message
-      }
-    })
+    next(error);
   }
 }
 
@@ -72,7 +64,7 @@ exports.insert = async(req, res, next) => {
     name: name,
     salary: salary,
     photo: config.DOMAIN + await saveImageToDisk(photo)
-  });   //Define Staff's Properties
+  });   //Define Staff's
   // let staff = new Staff(req.body); //All Fields
   await staff.save();
 
@@ -112,11 +104,9 @@ exports.update = async (req, res, next) => {
       })
 
     } catch (error) {
-      res.status(400).json({
-        error:{
-          message: 'เกิดข้อผิดพลาด: ' + error.message
-        }
-      })
+      const e = new Error(error.message)
+      e.statusCode = 400
+      next(error);
     }
 }
 
