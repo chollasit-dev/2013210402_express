@@ -72,7 +72,7 @@ exports.insert = async(req, res, next) => {
     name: name,
     salary: salary,
     photo: config.DOMAIN + await saveImageToDisk(photo)
-  });
+  });   //Define Staff's Properties
   // let staff = new Staff(req.body); //All Fields
   await staff.save();
 

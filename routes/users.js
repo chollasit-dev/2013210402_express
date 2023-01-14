@@ -14,4 +14,6 @@ router.get('/bio', userController.bio);
 
 router.get('/', userController.index);
 
+router.post('/', userController.register);
+
 module.exports = router;

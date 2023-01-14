@@ -5,10 +5,10 @@ var logger = require('morgan');
 const mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var userRouter = require('./routes/users');
 var companyRouter = require('./routes/company');
 var shopRouter = require('./routes/shop');
-const staffController = require('./routes/staff');
+const staffRouter = require('./routes/staff');
 const config = require('./config/index');
 
 var app = express();
@@ -23,10 +23,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const staffRouter = require('./routes/staff')
-
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', userRouter);
 app.use('/company', companyRouter);
 app.use('/staff', staffRouter);
 app.use('/shop', shopRouter);
